@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
 
-import { useLogIn, useLogingIn } from '../..'
+import { useLogIn, useLogingIn } from '../../hooks'
 
 import './styles.css'
 
