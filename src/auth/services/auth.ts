@@ -10,15 +10,15 @@ import {
   Subscription,
 } from 'rxjs'
 
+import type { AppConfiguration } from '../../app'
+import type { LogInRequest } from '../domain'
+
 const TOKEN_STORAGE_KEY = 'token'
 
-export interface LogInRequest {
-  email: string
-  password: string
-}
+export type AuthServiceOptions = Pick<AppConfiguration, 'backEndUrl'>
 
 export class AuthService {
-  constructor() {
+  constructor(private options: AuthServiceOptions) {
     this.token = this.tokenSubject = new BehaviorSubject(
       localStorage.getItem(TOKEN_STORAGE_KEY) ?? undefined
     )
@@ -41,7 +41,7 @@ export class AuthService {
     // Log in
     subscription.add(
       this.logInRequest
-        .pipe(delay(2000), mapTo('my-token'))
+        .pipe(delay(2000), mapTo('83167767-8cb5-4852-88c0-4cddb36342ec'))
         .subscribe(this.tokenSubject)
     )
 

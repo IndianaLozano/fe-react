@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 
 import { useObservableSubscription } from '../../shared/hooks'
 import { AuthContext } from '../context'
@@ -51,4 +51,20 @@ export const useToken = (): string => {
   }
 
   return token
+}
+
+export const useAuthenticatedFetchRequest = (request?: Request): Request => {
+  const token = useToken()
+  const previousRequest = useMemo(() => request ?? ({} as Request), [request])
+
+  return useMemo(
+    () => ({
+      ...previousRequest,
+      headers: {
+        ...(previousRequest.headers ?? {}),
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+    [previousRequest, token]
+  )
 }

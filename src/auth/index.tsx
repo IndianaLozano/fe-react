@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useRef } from 'react'
 import { Subscription } from 'rxjs'
 
-import { useRegisterFatalError } from '../app'
+import { useAppConfiguration, useRegisterFatalError } from '../app'
 import { useObservableSubscription } from '../shared'
 
 import { LoginForm } from './components'
@@ -9,7 +9,7 @@ import { AuthContext } from './context'
 import { AuthService } from './services'
 
 const AuthModule: FunctionComponent = ({ children }) => {
-  const { current: auth } = useRef(new AuthService())
+  const { current: auth } = useRef(new AuthService(useAppConfiguration()))
   const registerFatalError = useRegisterFatalError()
 
   const loggedIn = useObservableSubscription(auth.loggedIn)
