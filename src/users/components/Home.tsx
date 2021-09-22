@@ -1,11 +1,8 @@
 import { FunctionComponent } from 'react'
+import { CreateUser } from './CreateUser'
+import { UsersTable } from './UsersTable'
 
-import { Page } from '../../shared'
+const ESTA_CREANDO_UN_USUARIO = false
 
-export const UsersHome: FunctionComponent = () => (
-  <Page>
-    <div className="intro">
-      Edit <span>src/users/components/Home.tsx</span> to continue
-    </div>
-  </Page>
-)
+export const UsersHome: FunctionComponent = () =>
+  ESTA_CREANDO_UN_USUARIO ? <CreateUser /> : <UsersTable />
