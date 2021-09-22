@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 
 import { Page } from '../../shared'
+import './feed.css'
 
 export const FeedHome: FunctionComponent = () => (
   <Page>
