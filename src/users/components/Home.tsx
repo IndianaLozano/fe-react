@@ -1,8 +1,14 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { CreateUser } from './CreateUser'
 import { UsersTable } from './UsersTable'
 
-const ESTA_CREANDO_UN_USUARIO = false
+export const UsersHome: FunctionComponent = () => {
+  const [estaCreandoUnUsuario, setEstaCreandoUnUsuario] =
+    useState<boolean>(false)
 
-export const UsersHome: FunctionComponent = () =>
-  ESTA_CREANDO_UN_USUARIO ? <CreateUser /> : <UsersTable />
+  return estaCreandoUnUsuario ? (
+    <CreateUser onGoBack={() => setEstaCreandoUnUsuario(false)} />
+  ) : (
+    <UsersTable onNuevoUsuario={() => setEstaCreandoUnUsuario(true)} />
+  )
+}

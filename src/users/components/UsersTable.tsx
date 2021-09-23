@@ -1,33 +1,36 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
+import { useFetch } from '../../app/hooks/fetch'
 import { Page, PageHeader } from '../../shared'
 import { User } from '../domain'
 import { UserRow } from './UserRow'
 
-export const UsersTable: FunctionComponent = () => {
-  const users: User[] = []
+export interface UsersTableProps {
+  onNuevoUsuario: () => void
+}
 
-  for (let i = 0; i < 5; i += 1) {
-    const numero = i + 1
-    const user: User = {
-      id: numero,
-      nombre: 'Nombre ' + numero,
-      apellido: 'Apellido ' + numero,
-      hobby: 'Hobby ' + numero,
-    }
+export const UsersTable: FunctionComponent<UsersTableProps> = ({
+  onNuevoUsuario,
+}) => {
+  const [users, setUsers] = useState<User[]>([])
+  const fetchUsers = useFetch<User[]>('users')
 
-    users.push(user)
-  }
+  useEffect(() => {
+    fetchUsers().then(setUsers)
+  }, [fetchUsers])
 
   return (
     <Page>
-      <PageHeader title="Usuarios" buttonLabel="Nuevo Usuario" />
-      <Table striped bordered hover>
+      <PageHeader
+        onButtonClick={onNuevoUsuario}
+        title="Usuarios"
+        buttonLabel="Nuevo Usuario"
+      />
+      <Table striped bordered>
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Hobby</th>
+            <th>Mail</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>

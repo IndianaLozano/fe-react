@@ -7,8 +7,7 @@ export interface UserRowProps {
 
 export const UserRow: FunctionComponent<UserRowProps> = ({ user }) => (
   <tr>
-    <td>{user.nombre}</td>
-    <td>{user.apellido}</td>
-    <td>{user.hobby}</td>
+    <td>{user.mail}</td>
+    <td>{user.status}</td>
   </tr>
 )
