@@ -3,3 +3,8 @@ export interface User {
   mail: string
   status: string
 }
+
+export interface CreateUserRequest {
+  mail: string
+  password: string
+}
